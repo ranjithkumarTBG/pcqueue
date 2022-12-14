@@ -1,0 +1,6 @@
+com/pcqueue/module/ProductDataStore.class
+com/pcqueue/lambda/ConnectLambda.class
+com/pcqueue/lambda/DisconnectLambda.class
+com/pcqueue/model/Product.class
+com/pcqueue/lambda/DefaultLambda.class
+com/pcqueue/lambda/ProductDetailsStreamingLambda.class

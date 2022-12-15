@@ -46,19 +46,16 @@ public class ProductDetailsStreamingLambda implements
     private void publishDataToConnections(List<String> connectionIds, List<Item> productList) {
         if (productList != null && productList.size() > 0) {
             for (String connectionId : connectionIds) {
-                for (Item product : productList) {
-                    pushDataToConnection(connectionId, product);
-
-                }
+                pushDataToConnection(connectionId, productList);
             }
         }
     }
 
-    private void pushDataToConnection(String connectionId, Item product) {
+    private void pushDataToConnection(String connectionId, List<Item> products) {
         try {
-            logger.info("pushing to connection:" + this.gson.toJson(product));
+            logger.info("pushing to connection:" + this.gson.toJson(products));
             PostToConnectionRequest postToConnectionRequest = new PostToConnectionRequest().withConnectionId(connectionId)
-                    .withData(StandardCharsets.UTF_8.newEncoder().encode(CharBuffer.wrap(this.gson.toJson(product))));
+                    .withData(StandardCharsets.UTF_8.newEncoder().encode(CharBuffer.wrap(this.gson.toJson(products))));
             PostToConnectionResult postToConnectionResult =apiAsync.postToConnection(postToConnectionRequest);
             logger.info("pushing to connection completed:");
         } catch (Exception ex) {
